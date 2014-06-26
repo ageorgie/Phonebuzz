@@ -1,5 +1,4 @@
 from twilio.util import RequestValidator
-from app import twilio_client
 import os
 
 AUTH_TOKEN = ''
