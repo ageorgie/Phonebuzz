@@ -19,9 +19,9 @@ def phase1():
 @app.route('/fizzbuzz', methods=['GET', 'POST'])
 def fizzbuzz():
   num = request.args.get('Digits')
-  
+  print num
   result = fizzbuzz(num)
-  
+  print result  
   resp = twiml.Response()
   resp.say(result)
 
