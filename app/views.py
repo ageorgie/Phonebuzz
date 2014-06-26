@@ -5,6 +5,7 @@ from app import twilio_client
 from twilio import twiml
 from flask import request
 from flask import render_template
+import time
 
 @app.before_request
 def before_request():
@@ -37,5 +38,7 @@ def fizzbuzz_req():
 @app.route('/start_outgoing_call', methods=['POST'])
 def start_outgoing_call():
   num = request.form['phone']
+  delay = request.form['delay']
+  time.sleep(delay)
   twilio_client.client.calls.create(to=num, from_="4378000684", url=request.url_root+"phase1")
   return "The call should start momentarily"
