@@ -21,7 +21,7 @@ def fizzbuzz_req():
   num = request.args.get('Digits')
   print int(num)
   print fizzbuzz.fizzbuzz(9)
-  result = fizzbuzz(int(num))
+  result = fizzbuzz.fizzbuzz(int(num))
   print result  
   resp = twiml.Response()
   resp.say(result)
