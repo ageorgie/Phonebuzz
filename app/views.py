@@ -37,6 +37,7 @@ def fizzbuzz_req():
 @app.route('/start_outgoing_call', methods=['POST'])
 def start_outgoing_call():
   num = request.form['phone']
+  print num
   call = twilio_client.calls.create(to=num,
                            from_="4378000684",
                            url="/phase1")
