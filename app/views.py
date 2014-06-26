@@ -1,6 +1,6 @@
 from app import app
 from app import fizzbuzz
-# from app import validator
+from app import validator
 from twilio import twiml
 from flask import request
 
