@@ -7,6 +7,9 @@ from flask import request
 from flask import render_template
 import time
 
+history = []
+callRequests = {}
+
 @app.before_request
 def before_request():
   if request.path in ["/phase1", "/fizzbuzz"]:
@@ -16,12 +19,13 @@ def before_request():
 @app.route('/')
 @app.route('/index')
 def index():
-  return render_template("index.html")
+  return render_template("index.html", history=history, callRequests=callRequests)
 
 @app.route('/phase1', methods=['POST'])
 def phase1():
+  currentTime = request.args.get('time')
   resp = twiml.Response()
-  with resp.gather(action="/fizzbuzz") as g:
+  with resp.gather(action=("/fizzbuzz?time="+currentTime)) as g:
     g.say("Please enter a number followed by the pound symbol")
 
   return str(resp)
@@ -29,6 +33,8 @@ def phase1():
 @app.route('/fizzbuzz', methods=['POST'])
 def fizzbuzz_req():
   num = request.form['Digits']
+  currentTime = request.args.get('time')
+  callRequests[currentTime] += (selectedNum,)
   result = fizzbuzz.fizzbuzz(int(num))
   resp = twiml.Response()
   resp.say(result)
@@ -39,6 +45,9 @@ def fizzbuzz_req():
 def start_outgoing_call():
   num = request.form['phone']
   delay = request.form['delay']
+  currentTime = time.strftime('%d/%m/%Y %I:%M:%S')
+  history.append(currentTime)
+  callRequests[currentTime] = (delay, num)
   time.sleep(int(delay))
-  twilio_client.client.calls.create(to=num, from_="4378000684", url=request.url_root+"phase1")
+  twilio_client.client.calls.create(to=num, from_="4378000684", url=request.url_root+"phase1?time="+currentTime)
   return "The call should start momentarily"
