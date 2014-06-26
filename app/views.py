@@ -1,5 +1,7 @@
 from app import app
+from app import fizzbuzz
 from twilio import twiml
+from flask import request
 
 @app.route('/')
 @app.route('/index')
@@ -16,7 +18,7 @@ def phase1():
 
 @app.route('/fizzbuzz', methods=['GET', 'POST'])
 def fizzbuzz():
-  num = @app.request.args.get('Digits')
+  num = request.args.get('Digits')
   
   result = fizzbuzz(num)
   
