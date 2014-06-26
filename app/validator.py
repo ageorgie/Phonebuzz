@@ -12,6 +12,8 @@ print "AFTER AUTH_TOKEN"
 
 validator = RequestValidator(AUTH_TOKEN)
 
+print "AFTER VALIDATOR INITIALIZATION"
+
 def isValid(url, signature, postVars = {}):
   print "I AM HERE"
   return validator.validate(url, postVars, signature)
