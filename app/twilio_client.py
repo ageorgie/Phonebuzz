@@ -1,8 +1,8 @@
 from twilio.rest import TwilioRestClient
 import os
 
-account = "avav"
-token = "aevae"
+account = ""
+token = ""
 
 if(account == "" or token == ""):
   account = os.environ['TWILIO_ACCOUNT']
