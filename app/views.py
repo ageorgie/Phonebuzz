@@ -1,6 +1,7 @@
 from app import app
 from app import fizzbuzz
 from app import validator
+from app import twilio_client
 from twilio import twiml
 from flask import request
 from flask import render_template
@@ -32,4 +33,10 @@ def fizzbuzz_req():
   resp.say(result)
 
   return str(resp)
-  
+
+@app.route('/start_outgoing_call', methods=['POST'])
+def start_outgoing_call():
+  num = request.form['phone']
+  call = twilio_client.calls.create(to=num,
+                           from_="4378000684",
+                           url="/phase1")
