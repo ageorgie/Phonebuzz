@@ -11,7 +11,7 @@ def index():
 @app.route('/phase1', methods=['GET', 'POST'])
 def phase1():
   resp = twiml.Response()
-  with resp.gather(action="/fizzbuzz") as g:
+  with resp.gather(action="http://aqueous-plateau-9121.herokuapp.com/fizzbuzz") as g:
     g.say("Please enter a number followed by the pound symbol")
 
   return str(resp)
