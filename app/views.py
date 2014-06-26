@@ -13,6 +13,7 @@ def index():
 def phase1():
   if not validator.isValid(request.url, request.headers['X-Twilio-Signature'], request.form):
     return str("That is invalid")
+  
   resp = twiml.Response()
   with resp.gather(action="/fizzbuzz") as g:
     g.say("Please enter a number followed by the pound symbol")
@@ -21,7 +22,9 @@ def phase1():
 
 @app.route('/fizzbuzz', methods=['POST'])
 def fizzbuzz_req():
-  print request.headers
+  if not validator.isValid(request.url, request.headers['X-Twilio-Signature'], request.form):
+    return str("That is invalid")
+
   num = request.form['Digits']
   result = fizzbuzz.fizzbuzz(int(num))
   resp = twiml.Response()
