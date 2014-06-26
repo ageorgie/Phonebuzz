@@ -20,7 +20,7 @@ def phase1():
 def fizzbuzz_req():
   num = request.args.get('Digits')
   print request.args
-  print fizzbuzz.fizzbuzz
+  print fizzbuzz.fizzbuzz(9)
   result = fizzbuzz(int(num))
   print result  
   resp = twiml.Response()
