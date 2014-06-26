@@ -6,8 +6,8 @@ from flask import request
 
 @app.before_request
 def before_request():
-  if not validator.isValid(request.url, request.headers['X-Twilio-Signature'], request.form):
-    return str("That is invalid")
+  if not validator.isValid(request.url, request.headers['X-Twilio-Signature'], request.form) and (request.path is in ['/phase1', '/fizzbuzz']:
+    return "That is invalid"
 
 @app.route('/')
 @app.route('/index')
