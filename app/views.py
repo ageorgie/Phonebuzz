@@ -11,7 +11,7 @@ def index():
 @app.route('/phase1', methods=['GET', 'POST'])
 def phase1():
   resp = twiml.Response()
-  with resp.gather(action="http://aqueous-plateau-9121.herokuapp.com/fizzbuzz") as g:
+  with resp.gather(action="http://aqueous-plateau-9121.herokuapp.com/fizzbuzz", method="GET") as g:
     g.say("Please enter a number followed by the pound symbol")
 
   return str(resp)
@@ -19,10 +19,7 @@ def phase1():
 @app.route('/fizzbuzz', methods=['GET', 'POST'])
 def fizzbuzz_req():
   num = request.args.get('Digits')
-  print int(num)
-  print fizzbuzz.fizzbuzz(9)
   result = fizzbuzz.fizzbuzz(int(num))
-  print result  
   resp = twiml.Response()
   resp.say(result)
 
