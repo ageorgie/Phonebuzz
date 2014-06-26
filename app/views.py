@@ -39,6 +39,6 @@ def fizzbuzz_req():
 def start_outgoing_call():
   num = request.form['phone']
   delay = request.form['delay']
-  time.sleep(delay)
+  time.sleep(int(delay))
   twilio_client.client.calls.create(to=num, from_="4378000684", url=request.url_root+"phase1")
   return "The call should start momentarily"
