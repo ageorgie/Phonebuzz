@@ -13,7 +13,7 @@ def before_request():
 @app.route('/')
 @app.route('/index')
 def index():
-  return "Welcome to the PhoneBuzz Test!"
+  return render_template("index.html")
 
 @app.route('/phase1', methods=['POST'])
 def phase1():
