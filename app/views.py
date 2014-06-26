@@ -17,7 +17,7 @@ def phase1():
   return str(resp)
 
 @app.route('/fizzbuzz', methods=['GET', 'POST'])
-def fizzbuzz():
+def fizzbuzz_req():
   num = request.args.get('Digits')
   print request.args
   result = fizzbuzz(int(num))
