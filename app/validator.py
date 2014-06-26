@@ -10,4 +10,5 @@ if AUTH_TOKEN == '':
 validator = RequestValidator(AUTH_TOKEN)
 
 def isValid(url, signature, postVars = {}):
+	print "I AM HERE"
 	return validator.validate(url, postVars, signature)
