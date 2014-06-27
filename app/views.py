@@ -25,7 +25,7 @@ def index():
 
 @app.route('/phase1', methods=['POST'])
 def phase1():
-  currentTime = request.args.get('time') or ""
+  currentTime = request.args.get('time')
   resp = twiml.Response()
   with resp.gather(action=("/fizzbuzz?time="+currentTime)) as g:
     g.say("Please enter a number followed by the pound symbol")
@@ -39,8 +39,7 @@ def fizzbuzz_req():
   num = request.form['Digits']
   currentTime = request.args.get('time')
   
-  if currentTime in callRequests:
-    callRequests[currentTime] += (num,)
+  callRequests[currentTime] += (num,)
   
   result = fizzbuzz.fizzbuzz(int(num))
   
@@ -51,11 +50,18 @@ def fizzbuzz_req():
 
 @app.route('/replay', methods=['POST'])
 def replay():
+  global history
+  global callRequests
+
   num = request.form['Digits']
   phoneNum = request.form['Phone']
 
-  print request.url_root+"phase1"
-  twilio_client.client.calls.create(to=phoneNum, from_="4378000684", url=request.url_root+"phase1", send_digits=num)
+  currentTime = time.strftime('%d.%m.%Y%I.%M.%S')
+
+  history.append(currentTime)
+  callRequests[currentTime] = (delay, num)
+
+  twilio_client.client.calls.create(to=phoneNum, from_="4378000684", url=request.url_root+"phase1?time="+currentTime, send_digits=num)
 
   return "The call will start momentarily"
 
