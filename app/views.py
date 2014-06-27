@@ -51,12 +51,10 @@ def fizzbuzz_req():
 
 @app.route('/replay', methods=['POST'])
 def replay():
-  print "I AM IN REPLAY"
-  print request.form
   num = request.form['Digits']
   phoneNum = request.form['Phone']
 
-  twilio_client.client.calls.create(to=phoneNum, from_="4378000684", url=request.url_root+"phase1", send_digits=num)
+  twilio_client.client.calls.create(to=phoneNum, from_="4378000684", url=request.url_root+"phase1")
 
   return "The call will start momentarily"
 
