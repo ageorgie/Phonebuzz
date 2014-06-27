@@ -59,7 +59,7 @@ def replay():
   currentTime = time.strftime('%d.%m.%Y%I.%M.%S')
 
   history.append(currentTime)
-  callRequests[currentTime] = (delay, num)
+  callRequests[currentTime] = (0, phoneNum)
 
   twilio_client.client.calls.create(to=phoneNum, from_="4378000684", url=request.url_root+"phase1?time="+currentTime, send_digits=num)
 
