@@ -57,6 +57,7 @@ def start_outgoing_call():
   print "HISTORY"
   callRequests[currentTime] = (delay, num)
   print "Call Requests"
+  print request.url_root+"phase1?time="+currentTime
   time.sleep(int(delay))
   twilio_client.client.calls.create(to=num, from_="4378000684", url=request.url_root+"phase1?time="+currentTime)
   return "The call should start momentarily"
