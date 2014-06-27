@@ -56,6 +56,7 @@ def replay():
   num = request.form['Digits']
   phoneNum = request.form['Phone']
 
+  print request.url_root+"phase1"
   twilio_client.client.calls.create(to=phoneNum, from_="4378000684", url=request.url_root+"phase1")
 
   return "The call will start momentarily"
