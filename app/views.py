@@ -37,7 +37,7 @@ def fizzbuzz_req():
   global callRequests
   num = request.form['Digits']
   currentTime = request.args.get('time')
-  callRequests[currentTime] += (selectedNum,)
+  callRequests[currentTime] += (num,)
   result = fizzbuzz.fizzbuzz(int(num))
   resp = twiml.Response()
   resp.say(result)
