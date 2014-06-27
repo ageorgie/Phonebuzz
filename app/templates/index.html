@@ -28,8 +28,9 @@
 				<td>{{callRequests[h][1]}}</td>
 				<td>{{callRequests[h][0]}}</td>
 				<td>{{callRequests[h][2]}}</td>
-				<td><form name="replay" method="post" action="fizzbuzz">
+				<td><form name="replay" method="post" action="replay">
 						<input type="hidden" name="Digits" value={{callRequests[h][2]}}>
+						<input type="hidden" name="phone" value={{callRequests[h][1]}}
 						<input type="submit" value="Replay">
 					</form></td>
 			</tr>

@@ -37,27 +37,33 @@ def fizzbuzz_req():
   global callRequests
   num = request.form['Digits']
   currentTime = request.args.get('time')
-  callRequests[currentTime] += (num,)
+  if currentTime in callRequests:
+    callRequests[currentTime] += (num,)
   result = fizzbuzz.fizzbuzz(int(num))
   resp = twiml.Response()
   resp.say(result)
 
   return str(resp)
 
+@app.route('/replay', methods=['POST'])
+def replay():
+  num = request.form['Digits']
+  phoneNum = request.form['Phone']
+
+  twilio_client.client.calls.create(to=phoneNum, from_="4378000684", url=request.url_root+"phase1", send_digits=num)
+
+  return "The call will start momentarily"
+
+
+
 @app.route('/start_outgoing_call', methods=['POST'])
 def start_outgoing_call():
   global history
   global callRequests
-  print "BEFORE EVERYTHING"
   num = request.form['phone']
   delay = request.form['delay']
   currentTime = time.strftime('%d.%m.%Y%I.%M.%S')
-  print "CURRENT TIME"
   history.append(currentTime)
-  print "HISTORY"
   callRequests[currentTime] = (delay, num)
-  print "Call Requests"
-  print request.url_root+"phase1?time="+currentTime
   time.sleep(int(delay))
   twilio_client.client.calls.create(to=num, from_="4378000684", url=request.url_root+"phase1?time="+currentTime)
-  return "The call should start momentarily"
