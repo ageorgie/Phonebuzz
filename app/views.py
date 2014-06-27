@@ -19,6 +19,8 @@ def before_request():
 @app.route('/')
 @app.route('/index')
 def index():
+  global history
+  global callRequests
   return render_template("index.html", history=history, callRequests=callRequests)
 
 @app.route('/phase1', methods=['POST'])
@@ -32,6 +34,7 @@ def phase1():
 
 @app.route('/fizzbuzz', methods=['POST'])
 def fizzbuzz_req():
+  global callRequests
   num = request.form['Digits']
   currentTime = request.args.get('time')
   callRequests[currentTime] += (selectedNum,)
@@ -43,6 +46,8 @@ def fizzbuzz_req():
 
 @app.route('/start_outgoing_call', methods=['POST'])
 def start_outgoing_call():
+  global history
+  global callRequests
   num = request.form['phone']
   delay = request.form['delay']
   currentTime = time.strftime('%d/%m/%Y %I:%M:%S')
