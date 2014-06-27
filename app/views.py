@@ -25,8 +25,7 @@ def index():
 
 @app.route('/phase1', methods=['POST'])
 def phase1():
-  print "I AM IN PHASE1"
-  currentTime = request.args.get('time')
+  currentTime = request.args.get('time') or ""
   resp = twiml.Response()
   with resp.gather(action=("/fizzbuzz?time="+currentTime)) as g:
     g.say("Please enter a number followed by the pound symbol")
@@ -52,7 +51,6 @@ def fizzbuzz_req():
 
 @app.route('/replay', methods=['POST'])
 def replay():
-  print "I AM IN REPLAY"
   num = request.form['Digits']
   phoneNum = request.form['Phone']
 
