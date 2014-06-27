@@ -51,7 +51,7 @@ def start_outgoing_call():
   print "BEFORE EVERYTHING"
   num = request.form['phone']
   delay = request.form['delay']
-  currentTime = time.strftime('%d/%m/%Y %I:%M:%S')
+  currentTime = time.strftime('%d.%m.%Y%I.%M.%S')
   print "CURRENT TIME"
   history.append(currentTime)
   print "HISTORY"
