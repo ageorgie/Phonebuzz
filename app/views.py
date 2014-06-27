@@ -51,6 +51,8 @@ def fizzbuzz_req():
 
 @app.route('/replay', methods=['POST'])
 def replay():
+  print "I AM IN REPLAY"
+  print request.form
   num = request.form['Digits']
   phoneNum = request.form['Phone']
 
